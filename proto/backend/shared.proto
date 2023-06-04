@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package shared;
+
+option go_package = "./fancygame";
+
+message EmptyReq {}
+
+enum AvatarEnum{
+    ZERO = 0;
+    ONE = 1;
+}
+
+enum GenderEnum{
+    GIRL = 0;
+    BOY = 1;
+}

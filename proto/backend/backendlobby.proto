@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package backendlobby;
+
+option go_package = "./fancygame";
+
+import "shared.proto";
+
+service Lobby{
+    rpc GetMemberList(shared.EmptyReq)returns(GetMemberListRes);
+    rpc SetMemberData(SetMember)returns(SetMemberRes);
+    rpc KickOutMember(KickOutMemberInfo)returns(KickOutMemberRes);
+}
+
+// GetMemberList
+message GetMemberListRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    MemberListInfo Data = 3;
+}
+
+message MemberListInfo{
+    repeated MemberList memberList = 1;
+}
+
+message MemberList{
+    string account = 1;
+    string password = 2;
+    shared.AvatarEnum avatar = 3;
+    shared.GenderEnum gender = 4;
+    int64 lastLoginTime = 5;
+    int64 lastLogoutTime = 6;
+    int64 balance = 7;
+}
+
+// SetMember
+message SetMember{
+    string Account = 1;
+    string Password = 2;
+    shared.AvatarEnum Gender = 3;
+    shared.GenderEnum Avatar = 4;
+    int64 Balance = 5;
+}
+
+message SetMemberRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    UpdateMemberData Data = 3;
+}
+
+// GetGameList
+message GetGameListRes{
+    int64 StatusCode =1;
+    string Message = 2;
+    GetGameListResInfo Data = 3;
+}
+
+message GetGameListResInfo{
+    repeated GameList gameList = 1;
+}
+
+message GameList{
+    int64 GameId = 1;
+    bool Status = 2;
+}
+
+// SetGame
+message SetGame{
+    int64 GameId = 1;
+    bool Status = 2;
+}
+
+// KickOutMember
+message KickOutMemberInfo{
+    string Account = 1;
+    int64 Balance = 2;
+}
+
+message KickOutMemberRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+}
+
+// UpdateMemberData
+message UpdateMemberData{
+    string account = 1;
+    string password = 2;
+    shared.AvatarEnum Avatar = 3;
+    shared.GenderEnum Gender = 4;
+    bool IsAdmin = 5;
+    int64 Balance = 6;
+    int64 LastLoginTime = 7;
+    int64 LastLogoutTime = 8;
+}
+
+// UpdateGameList
+message UpdateGameList{
+    repeated GameList gameList = 1;
+}

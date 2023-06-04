@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "./common";
+
+
+// Ping Pong
+message Pong{ 
+    int64 StatusCode = 1;
+    string Message = 2;
+    PongInfo Data = 3;
+}
+
+message PongInfo{
+    int64 TimeStamp = 1;
+}
+
+
+// Error
+message Error{
+    int64 StatusCode = 1;
+    string Message = 2;
+}
+
+// Register
+message Register{
+    string Account =1;
+    string Password =2;
+    AvatarEnum Avatar = 3;
+    GenderEnum Gender = 4;
+}
+
+message RegisterRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    RegisterResInfo Data = 3;
+}
+
+enum AvatarEnum{
+    ZERO = 0;
+    ONE = 1;
+}
+
+enum GenderEnum{
+    GIRL = 0;
+    BOY = 1;
+}
+
+message RegisterResInfo{
+    repeated GameList GameList = 1;
+    AvatarEnum Avatar = 2;
+    GenderEnum Gender = 3;
+    bool IsAdmin = 4;
+    int64 Balance = 5;
+}
+
+message GameList{ 
+    int64 GameId = 1;
+    bool Status = 2;
+}
+
+// Login
+message Login{
+    string Account = 1;
+    string Password = 2;
+}
+
+message LoginRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    LoginResInfo Data = 3;
+}
+
+message LoginResInfo{
+    repeated GameList GameList = 1;
+    AvatarEnum Avatar = 2;
+    GenderEnum Gender = 3;
+    bool IsAdmin = 4;
+    int64 Balance = 5;
+}
+
+// Logout
+message LogoutRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+}
+
+// KickOut
+message KickOut{
+    int64 StatusCode = 1;   
+    string Message = 2;
+}

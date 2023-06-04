@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package backenduser;
+
+option go_package = "./fancygame";
+
+import "shared.proto";
+
+service User{
+    rpc Register(RegisterInfo)returns(RegisterRes);
+    rpc Login(LoginInfo)returns(LoginRes);
+    rpc Logout(LogoutInfo)returns(LogoutRes);
+}
+
+
+message RegisterInfo{
+    string Account = 1;
+    string Password = 2;
+    shared.AvatarEnum Avatar = 3;
+    shared.GenderEnum Gender = 4;
+}  
+
+message RegisterRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    RegisterResInfo Data = 3;
+}
+
+message RegisterResInfo{
+    shared.AvatarEnum Avatar = 2;
+    shared.GenderEnum Gender = 3;
+    bool IsAdmin = 4;
+    int64 Balance = 5;
+}
+
+message LoginInfo{
+    string Account = 1;
+    string Password = 2;
+}
+
+message LoginRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    LoginResInfo Data = 3;
+}
+
+message LoginResInfo{
+    shared.AvatarEnum Avatar = 2;
+    shared.GenderEnum Gender = 3;
+    bool IsAdmin = 4;
+    int64 Balance = 5;
+}
+
+message LogoutInfo{
+    string Account = 1;
+    int64 Balance = 2;
+}
+
+message LogoutRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+}

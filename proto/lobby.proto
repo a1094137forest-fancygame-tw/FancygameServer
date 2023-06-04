@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package lobby;
+
+option go_package = "./lobby";
+
+// GetMemberList
+message GetMemberListRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+    MemberListInfo Data = 3;
+}
+
+message MemberListInfo{
+    repeated MemberList MemberList = 1;
+}
+
+message MemberList{
+    string Account = 1;
+    string Password = 2;
+    AvatarEnum Avatar = 3;
+    GenderEnum Gender = 4;
+    int64 LastLoginTime = 5;
+    int64 LastLogoutTime = 6;
+    int64 Balance = 7;
+}
+
+// SetMember
+message SetMember{
+    string Account = 1;
+    string Password = 2;
+    AvatarEnum Gender = 3;
+    GenderEnum Avatar = 4;
+    int64 Balance = 5;
+}
+
+message SetMemberRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+}
+
+// GetGameList
+message GetGameListRes{
+    int64 StatusCode =1;
+    string Message = 2;
+    GetGameListResInfo Data = 3;
+}
+
+message GetGameListResInfo{
+    repeated GameList GameList = 1;
+}
+
+message GameList{
+    int64 GameId = 1;
+    bool Status = 2;
+}
+
+// SetGame
+message SetGame{
+    int64 GameId = 1;
+    bool Status = 2;
+}
+
+// KickOutMember
+message KickOutMember{
+    string Account = 1;
+}
+
+message KickOutMemberRes{
+    int64 StatusCode = 1;
+    string Message = 2;
+}
+
+// UpdateMemberData
+message UpdateMemberData{
+    string Account = 1;
+    string Password = 2;
+    AvatarEnum Avatar = 3;
+    GenderEnum Gender = 4;
+    bool IsAdmin = 5;
+    int64 Balance = 6;
+    int64 LastLoginTime = 7;
+    int64 LastLogoutTime = 8;
+}
+
+enum AvatarEnum{
+    ZERO = 0;
+    ONE = 1;
+}
+
+enum GenderEnum{
+    GIRL = 0;
+    BOY = 1;
+}
+
+// UpdateGameList
+message UpdateGameList{
+    repeated GameList GameList = 1;
+}
